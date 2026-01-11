@@ -4,21 +4,21 @@ void main() {
   runApp(const MonAppli());
 }
 
-// Premier Widget : Configuration (Stateless)
+// 1. Classe principale de configuration
 class MonAppli extends StatelessWidget {
   const MonAppli({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Magazine', // Titre demandé page 6
-      debugShowCheckedModeBanner: false, // Pour enlever la bande "Debug"
+      title: 'Magazine',
+      debugShowCheckedModeBanner: false,
       home: const pageAccueil(),
     );
   }
 }
 
-// Deuxième Widget : Interface (Stateless comme demandé Figure 4)
+// 2. Classe pageAccueil (modifiée pour l’Activité 4)
 class pageAccueil extends StatelessWidget {
   const pageAccueil({super.key});
 
@@ -26,26 +26,148 @@ class pageAccueil extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Magazine Infos'), // Titre page 7
+        title: const Text('Magazine Infos'),
         centerTitle: true,
-        backgroundColor: Colors.pink, // Couleur Figure 1
-        leading: const Icon(Icons.menu), // Icône menu à gauche
-        actions: const [
-          Icon(Icons.search), // Icône recherche à droite
-          SizedBox(width: 10),
-        ],
+        backgroundColor: Colors.pink,
+        leading: const Icon(Icons.menu),
+        actions: const [Icon(Icons.search), SizedBox(width: 10)],
       ),
-      body: Center(
-        // Utilisation de l'image déclarée dans ton pubspec.yaml
-        child: Image.asset('assets/images/magazineInfos.JPEG.png'),
+
+      body: const SingleChildScrollView(
+        child: Column(
+          children: [
+            Image(image: AssetImage('assets/Images/Magazineinfos.png')),
+            PartieTitre(),
+            PartieTexte(),
+            PartieIcone(),
+            PartieRubrique(),
+          ],
+        ),
       ),
+
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Action demandée page 7 : afficher un message en console
           print('Tu as cliqué dessus');
         },
         backgroundColor: Colors.pink,
-        child: const Text('Click'), // Texte demandé sur le bouton
+        child: const Text('Click'),
+      ),
+    );
+  }
+}
+
+// 3. Classe PartieTitre
+class PartieTitre extends StatelessWidget {
+  const PartieTitre({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
+      child: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Titre du premier niveau",
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 5),
+          Text(
+            "Titre du second niveau",
+            style: TextStyle(fontSize: 18, color: Colors.grey),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// 4. Classe PartieTexte
+class PartieTexte extends StatelessWidget {
+  const PartieTexte({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      child: const Text(
+        "Magazine Infos est un magazine numérique moderne qui offre à ses lecteurs "
+        "des articles variés sur la mode, la presse, la culture et les tendances actuelles.",
+        style: TextStyle(fontSize: 16),
+      ),
+    );
+  }
+}
+
+// 5. Classe PartieIcone
+class PartieIcone extends StatelessWidget {
+  const PartieIcone({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Column(
+            children: const [
+              Icon(Icons.phone, color: Colors.pink),
+              SizedBox(height: 5),
+              Text("TEL", style: TextStyle(color: Colors.pink)),
+            ],
+          ),
+          Column(
+            children: const [
+              Icon(Icons.email, color: Colors.pink),
+              SizedBox(height: 5),
+              Text("MAIL", style: TextStyle(color: Colors.pink)),
+            ],
+          ),
+          Column(
+            children: const [
+              Icon(Icons.share, color: Colors.pink),
+              SizedBox(height: 5),
+              Text("PARTAGE", style: TextStyle(color: Colors.pink)),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// 6. Classe PartieRubrique
+class PartieRubrique extends StatelessWidget {
+  const PartieRubrique({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.asset(
+              'assets/Images/Presse.jpg',
+              width: 150,
+              height: 120,
+              fit: BoxFit.cover,
+            ),
+          ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.asset(
+              'assets/Images/Mode.png',
+              width: 150,
+              height: 120,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ],
       ),
     );
   }
