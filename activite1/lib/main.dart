@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'interface/redacteur_interface.dart';
 
 void main() {
   runApp(const MonAppli());
@@ -11,14 +12,14 @@ class MonAppli extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Magazine',
+      title: 'Magazine Infos',
       debugShowCheckedModeBanner: false,
-      home: const pageAccueil(),
+      home: const pageAccueil(), // Magazine Infos reste la page d’accueil
     );
   }
 }
 
-// 2. Classe pageAccueil (modifiée pour l’Activité 4)
+// 2. Classe pageAccueil (inchangée)
 class pageAccueil extends StatelessWidget {
   const pageAccueil({super.key});
 
@@ -29,7 +30,15 @@ class pageAccueil extends StatelessWidget {
         title: const Text('Magazine Infos'),
         centerTitle: true,
         backgroundColor: Colors.pink,
-        leading: const Icon(Icons.menu),
+        leading: IconButton(
+          icon: const Icon(Icons.menu),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => RedacteurInterface()),
+            );
+          },
+        ),
         actions: const [Icon(Icons.search), SizedBox(width: 10)],
       ),
 
